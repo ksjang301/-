@@ -83,10 +83,10 @@ function handleScroll(event) {
             /* document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background2.png')";
             해상도 비율에 따른 이미지 변경 (적용 시 위 바로 document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background2.png')"; 주석처리)
              */
-            if ((window.innerWidth - 150) >= 468) {
+            if ((window.innerWidth - 150) >= 700) {
                 console.log(window.innerWidth);
                 document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background2.png')";
-            } else if ((window.innerWidth - 150) < 468) {
+            } else if ((window.innerWidth - 150) < 700) {
                 console.log(window.innerWidth);
                 document.getElementById('section1').style.backgroundImage = "url('./public/images/mobile_s1_2.png')";
             } 
@@ -217,10 +217,10 @@ function handleScroll(event) {
             document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background1.png')";
             해상도 비율에 따른 배경 이미지 변경 (적용 시 위 바로 document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background1.png')"; 주석처리)
              */
-            if ((window.innerWidth - 150) >= 468) {
+            if ((window.innerWidth - 150) >= 700) {
                 console.log(window.innerWidth);
                 document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background1.png')";
-            } else if ((window.innerWidth - 150) < 468) {
+            } else if ((window.innerWidth - 150) < 700) {
                 console.log(window.innerWidth);
                 document.getElementById('section1').style.backgroundImage = "url('./public/images/mobile_s1_1.png')";
             }
@@ -705,12 +705,12 @@ document.querySelectorAll('#sidebar ul li').forEach(item => {
 //해상도 비율에 따른 배경 초기 이미지 선정 
 document.addEventListener("DOMContentLoaded", function () {
     function updateSectionBackground() {
-        if ((window.innerWidth - 150) >= 468) {
+        if ((window.innerWidth - 150) >= 700) {
             console.log(window.innerWidth);
-            document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background2.png')";
-        } else if ((window.innerWidth - 150) < 468) {
+            document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background1.png')";
+        } else if ((window.innerWidth - 150) < 700) {
             console.log(window.innerWidth);
-            document.getElementById('section1').style.backgroundImage = "url('./public/images/mobile_s1_2.png')";
+            document.getElementById('section1').style.backgroundImage = "url('./public/images/mobile_s1_1.png')";
         }
     }
 

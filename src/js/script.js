@@ -2,28 +2,35 @@
 let currentSection = 1;
 let isImageChanged = false;
 let scrollCount = 0;
-let touchStart = 0;
-let touchMove = 0;
+let touchStart = 0; 
 let touchEnd = 0;
 
-window.addEventListener('touchstart', function (event) {
-    touchStart = event.changedTouches[0].screenY;
+// touchstart 이벤트 핸들러
+window.addEventListener('touchstart', function(event) {
+    touchStart = event.changedTouches[0].clientY;
 }, false);
 
-window.addEventListener('touchend', function (event) {
-    touchEnd = event.changedTouches[0].screenY;
-    handleTouchMove();
+// touchend 이벤트 핸들러
+window.addEventListener('touchend', function(event) {
+    touchEnd = event.changedTouches[0].clientY;
+    handleSwipe();
 }, false);
 
-window.addEventListener('touchmove', function (event) {
-    touchMove = event.changedTouches[0].screenY;
-   /// handleTouchMove();
-}, false);
-
-function handleTouchMove() {
-    const deltaY = touchStart - touchMove;
-    const event = { deltaY: deltaY };
-    handleScroll(event);
+// 스와이프 방향에 따른 로직 처리
+function handleSwipe() {
+    if (touchEnd < touchStart) { // 스와이프 아래로
+        if (currentSection < 15) {
+            // 다음 섹션으로
+            currentSection++;
+            scrollToSection(currentSection);
+        }
+    } else if (touchEnd > touchStart) { // 스와이프 위로
+        if (currentSection > 1) {
+            // 이전 섹션으로
+            currentSection--;
+            scrollToSection(currentSection);
+        }
+    }
 }
 
 // 윈도우 기본 휠이벤트 삭제

@@ -1,13 +1,9 @@
 // 초기값 세팅
 let currentSection = 1;
 let isImageChanged = false;
-let scrollCount = 0;
-let touchStart = 0;
+let scrollCount = 0; 
 let touchMove = 0; 
 
-window.addEventListener('touchstart', function (event) {
-    touchStart = event.changedTouches[0].screenY;
-}, false);
  
 window.addEventListener('touchmove', function (event) {
     touchMove = event.changedTouches[0].screenY;

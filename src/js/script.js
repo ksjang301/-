@@ -13,24 +13,11 @@ window.addEventListener('touchstart', function (event) {
 window.addEventListener('touchend', function (event) {
     touchEnd = event.changedTouches[0].screenY;
     handleTouchMove();
-
-    // 터치 이벤트가 끝난 후 현재 스크롤 위치를 체크하고 해당하는 섹션으로 스크롤
-    const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-    const sections = document.querySelectorAll('section');
-    let currentSectionIndex = 0;
-
-    for (let i = 0; i < sections.length; i++) {
-        if (currentScrollPosition >= sections[i].offsetTop) {
-            currentSectionIndex = i;
-        }
-    }
-
-    scrollToSection(currentSectionIndex + 1);
 }, false);
 
 window.addEventListener('touchmove', function (event) {
     touchMove = event.changedTouches[0].screenY;
-    handleTouchMove();
+   /// handleTouchMove();
 }, false);
 
 function handleTouchMove() {

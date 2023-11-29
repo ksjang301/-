@@ -11,8 +11,8 @@ window.addEventListener('touchmove', function (event) {
 }, false);
 
 function handleTouchMove() {
-    const deltaY = touchMove - touchStart;
-    const event = { deltaY: deltaY };
+    const deltaY = touchStart - touchMove;  
+    const event = { deltaY: deltaY, touch: true };
     handleScroll(event);
 }
 

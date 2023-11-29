@@ -1,9 +1,13 @@
 // 초기값 세팅
 let currentSection = 1;
 let isImageChanged = false;
-let scrollCount = 0; 
+let scrollCount = 0;
+let touchStart = 0;
 let touchMove = 0; 
 
+window.addEventListener('touchstart', function (event) {
+    touchStart = event.changedTouches[0].screenY;
+}, false);
  
 window.addEventListener('touchmove', function (event) {
     touchMove = event.changedTouches[0].screenY;
@@ -11,7 +15,7 @@ window.addEventListener('touchmove', function (event) {
 }, false);
 
 function handleTouchMove() {
-    const deltaY = touchStart - touchMove;  
+    const deltaY = touchStart - touchMove; // 이 부분을 수정하였습니다.
     const event = { deltaY: deltaY, touch: true };
     handleScroll(event);
 }

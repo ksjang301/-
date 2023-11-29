@@ -3,20 +3,39 @@ let currentSection = 1;
 let isImageChanged = false;
 let scrollCount = 0;
 let touchStart = 0;
-let touchMove = 0; 
+let touchMove = 0;
+let touchEnd = 0;
 
 window.addEventListener('touchstart', function (event) {
     touchStart = event.changedTouches[0].screenY;
 }, false);
- 
+
+window.addEventListener('touchend', function (event) {
+    touchEnd = event.changedTouches[0].screenY;
+    handleTouchMove();
+
+    // 터치 이벤트가 끝난 후 현재 스크롤 위치를 체크하고 해당하는 섹션으로 스크롤
+    const currentScrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    const sections = document.querySelectorAll('section');
+    let currentSectionIndex = 0;
+
+    for (let i = 0; i < sections.length; i++) {
+        if (currentScrollPosition >= sections[i].offsetTop) {
+            currentSectionIndex = i;
+        }
+    }
+
+    scrollToSection(currentSectionIndex + 1);
+}, false);
+
 window.addEventListener('touchmove', function (event) {
     touchMove = event.changedTouches[0].screenY;
     handleTouchMove();
 }, false);
 
 function handleTouchMove() {
-    const deltaY = touchStart - touchMove; // 이 부분을 수정하였습니다.
-    const event = { deltaY: deltaY, touch: true };
+    const deltaY = touchStart - touchMove;
+    const event = { deltaY: deltaY };
     handleScroll(event);
 }
 
@@ -60,18 +79,18 @@ function handleScroll(event) {
 
     if (event.deltaY > 0) { //휠 아래로
         if (currentSection == 1 && !isImageChanged) { //첫번째 섹션
-            // 조건이 맞으면 backgroundImage변경
-            document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background2.png')";
-  
-            /* 해상도 비율에 따른 이미지 변경 (적용 시 위 바로 document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background2.png')"; 주석처리)
+            // 조건이 맞으면 backgroundImage변경            
+            /* document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background2.png')";
+            해상도 비율에 따른 이미지 변경 (적용 시 위 바로 document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background2.png')"; 주석처리)
+             */
             if ((window.innerWidth - 150) >= 468) {
                 console.log(window.innerWidth);
-                document.getElementById('section1').style.backgroundImage = "url('./public/images/phone_2.png')";
+                document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background2.png')";
             } else if ((window.innerWidth - 150) < 468) {
                 console.log(window.innerWidth);
-                document.getElementById('section1').style.backgroundImage = "url('./public/images/section13_phone.png')";
+                document.getElementById('section1').style.backgroundImage = "url('./public/images/mobile_s1_2.png')";
             } 
-            */
+           
 
             isImageChanged = true;
 
@@ -194,16 +213,18 @@ function handleScroll(event) {
     } else if (event.deltaY < 0) { //휠 위로
         if (isImageChanged && currentSection == 1) {
             // 조건에 맞으면 배경이미지 변경
+            /* 
             document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background1.png')";
-            /* 해상도 비율에 따른 배경 이미지 변경 (적용 시 위 바로 document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background1.png')"; 주석처리)
+            해상도 비율에 따른 배경 이미지 변경 (적용 시 위 바로 document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background1.png')"; 주석처리)
+             */
             if ((window.innerWidth - 150) >= 468) {
                 console.log(window.innerWidth);
-                document.getElementById('section1').style.backgroundImage = "url('./public/images/section13_phone.png')";
+                document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background1.png')";
             } else if ((window.innerWidth - 150) < 468) {
                 console.log(window.innerWidth);
-                document.getElementById('section1').style.backgroundImage = "url('./public/images/phone_2.png')";
+                document.getElementById('section1').style.backgroundImage = "url('./public/images/mobile_s1_1.png')";
             }
-            */
+           
             isImageChanged = false;
             // 헤더와 로고 변경
             if (!header.classList.contains('active')) {
@@ -681,15 +702,15 @@ document.querySelectorAll('#sidebar ul li').forEach(item => {
     });
 });
 
-/* 해상도 비율에 따른 배경 초기 이미지 선정 
+//해상도 비율에 따른 배경 초기 이미지 선정 
 document.addEventListener("DOMContentLoaded", function () {
     function updateSectionBackground() {
         if ((window.innerWidth - 150) >= 468) {
             console.log(window.innerWidth);
-            document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background1.png')";
+            document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background2.png')";
         } else if ((window.innerWidth - 150) < 468) {
             console.log(window.innerWidth);
-            document.getElementById('section1').style.backgroundImage = "url('./public/images/main_background2.png')";
+            document.getElementById('section1').style.backgroundImage = "url('./public/images/mobile_s1_2.png')";
         }
     }
 
@@ -698,4 +719,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 화면 크기가 변경될 때마다 업데이트
     window.addEventListener("resize", updateSectionBackground);
-});*/
+});
